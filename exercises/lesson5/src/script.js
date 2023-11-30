@@ -12,6 +12,12 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+
+const gltfLoader = new GLTFLoader();
+console.log(gltfLoader);
+
+gltfLoader.load('./raptor-walk-sleepy.gltf.glb', () => { console.log("success") })
+
 /**
  * Base
  */
@@ -20,22 +26,6 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
-
-// Set up MeshoptDecoder
-const meshoptDecoder = new MeshoptDecoder();
-const { MeshoptDecoderModule } = meshoptDecoder;
-
-// Set the MeshoptDecoderModule buffer to be used by GLTFLoader
-GLTFLoader.setMeshoptDecoder(MeshoptDecoderModule);
-
-const loader = new GLTFLoader();
-
-loader.load('raptor-walk-sleepy.gltf.glb', function (gltf) {
-    sword = gltf.scene;  // sword 3D object is loaded
-    sword.scale.set(2, 2, 2);
-    sword.position.y = 0;
-    scene.add(sword);
-});
 
 const sizes = {
     width: 800,
